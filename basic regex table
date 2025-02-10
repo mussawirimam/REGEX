@@ -1,0 +1,79 @@
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| Command        | Description                                                       | Example                                       |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| .               | Matches any character except a newline.                           | `a.c` matches "abc", "axc", but not "ac"      |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| ^               | Anchors the match to the start of the string.                     | `^abc` matches "abc" at the start of a string |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| $               | Anchors the match to the end of the string.                       | `abc$` matches "abc" at the end of a string   |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| *               | Matches the preceding element zero or more times (greedy).        | `a*` matches "", "a", "aa", "aaa", etc.       |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| +               | Matches the preceding element one or more times (greedy).         | `a+` matches "a", "aa", "aaa", etc., but not ""|
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| ?               | Matches the preceding element zero or one time (greedy).          | `a?` matches "", "a"                          |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| {n,m}           | Matches the preceding element at least n times but at most m times.| `a{2,4}` matches "aa", "aaa", "aaaa"          |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| []              | Matches any one of the characters inside the brackets.            | `[abc]` matches "a", "b", or "c"              |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| [^]             | Matches any character except those inside the brackets.           | `[^abc]` matches any character except "a", "b", "c"|
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| |               | OR operator: Matches the expression on the left or the right.     | `abc|def` matches "abc" or "def"              |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| ()              | Groups multiple characters or expressions together.               | `(abc)+` matches "abc", "abcabc", etc.        |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| \               | Escape character to match special characters literally.           | `\.` matches a literal dot (.)                |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| \d              | Matches any digit (0-9).                                          | `\d` matches "3", "8", "0"                    |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| \D              | Matches any character that is not a digit.                       | `\D` matches "a", "b", " ", etc.              |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| \w              | Matches any word character (alphanumeric + underscore).           | `\w` matches "a", "b", "A", "1", "_"          |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| \W              | Matches any character that is not a word character.              | `\W` matches spaces, punctuation, etc.        |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| \s              | Matches any whitespace character (spaces, tabs, newlines).        | `\s` matches " ", "\t", "\n", etc.            |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| \S              | Matches any non-whitespace character.                             | `\S` matches "a", "b", "1", etc.              |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| (?i)            | Case-insensitive flag modifier.                                  | `(?i)abc` matches "abc", "ABC", "AbC", etc.   |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| (?:...)         | Non-capturing group (no backreference).                           | `(?:abc)+` matches "abcabc", but doesn't capture it|
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| (?...)          | Capturing group (captures the match for later use).              | `(abc)` captures "abc"                       |
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| \b              | Matches a word boundary (position between word and non-word).     | `\bcat\b` matches "cat" in "a cat", but not in "scatter"|
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+| \B              | Matches a non-word boundary (inside a word).                      | `\Bcat\B` matches "cat" in "scattered", but not in "a cat"|
++-----------------+-------------------------------------------------------------------+-----------------------------------------------+
+
+
+Quick Explanation of Special Commands:
+Anchors: ^ (start of string) and $ (end of string).
+Quantifiers: * (zero or more), + (one or more), ? (zero or one), {n,m} (n to m times).
+Character Classes: [] matches specific characters, [^] excludes specific characters.
+Special Shorthands: \d (digit), \w (word character), \s (whitespace).
+Capturing & Grouping: () for grouping, (?:) for non-capturing, \b (word boundary), and \B (non-word boundary).
+Flags and Modifiers: (?i) for case-insensitivity.
+
+
+Explanation:
+Anchors: ^ and $ are used to specify positions (start or end of the string).
+Quantifiers: *, +, ?, and {n,m} define how many times an element can be matched.
+Character Classes: [ ] allows matching a set of characters. [^ ] is used to match characters that are not in the set.
+Grouping and Capturing: ( ) is used to group parts of the regex or capture matches. (?: ) groups without capturing.
+Special Characters: \d, \w, \s, etc., are shorthand for common character types like digits, words, and whitespace.
+
+EXAMPLE:
+Matching a phone number:
+\d{3}-\d{3}-\d{4}
+This will match a phone number in the format 123-456-7890.
+
+Extracting email addresses:
+\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b
+This regex matches email addresses, like test@example.com.
+
+Matching a word at the start or end of a string:
+^\w+|\w+$
+This matches the first word (^\w+) or the last word (\w+$).
