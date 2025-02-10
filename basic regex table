@@ -1,3 +1,7 @@
+### Use this site below to practice your regex
+https://regexr.com/
+https://regex101.com/
+
 +-----------------+-------------------------------------------------------------------+-----------------------------------------------+
 | Command        | Description                                                       | Example                                       |
 +-----------------+-------------------------------------------------------------------+-----------------------------------------------+
@@ -77,3 +81,133 @@ This regex matches email addresses, like test@example.com.
 Matching a word at the start or end of a string:
 ^\w+|\w+$
 This matches the first word (^\w+) or the last word (\w+$).
+
+
+
+---------------------------------------------------------------------------------------------------------
+
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| Operator          | Description                                                      | Example                                      |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| .                 | Wildcard: Matches any character except a newline.                | `a.c` matches "abc", "axc", "a3c", etc.      |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| |                 | Alternation (OR): Matches the left or the right pattern.         | `cat|dog` matches "cat" or "dog".           |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| ^                 | Start of string anchor: Matches the start of the string.         | `^hello` matches "hello" at the start.      |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| $                 | End of string anchor: Matches the end of the string.             | `world$` matches "world" at the end.        |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| []                | Character class: Matches any one of the characters inside.       | `[abc]` matches "a", "b", or "c".           |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| [^]               | Negated character class: Matches anything except the listed chars| `[^abc]` matches anything but "a", "b", "c". |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| *                 | Matches 0 or more occurrences of the preceding element.          | `a*` matches "", "a", "aa", "aaa", etc.     |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| +                 | Matches 1 or more occurrences of the preceding element.          | `a+` matches "a", "aa", "aaa", etc.         |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| ?                 | Matches 0 or 1 occurrence of the preceding element.              | `a?` matches "", "a".                       |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| {n,m}             | Matches between n and m occurrences of the preceding element.    | `a{2,4}` matches "aa", "aaa", "aaaa".       |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| ()                | Groups expressions and captures the match.                      | `(abc)` captures "abc".                     |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| \                 | Escape special characters. Matches the literal character.        | `\.` matches a literal dot (".").           |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| \d                | Matches any digit (0-9).                                         | `\d` matches "3", "8", "0", etc.            |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| \w                | Matches any word character (letters, digits, underscore).       | `\w` matches "a", "b", "1", "_".            |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| \s                | Matches any whitespace character (spaces, tabs, newlines).       | `\s` matches " ", "\t", "\n".               |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| \b                | Word boundary: Matches position between word and non-word.      | `\bcat\b` matches "cat" in "a cat".         |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| (?=...)           | Positive lookahead: Matches if the group is followed by the pattern.| `\d(?=\D)` matches a digit followed by a non-digit. |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| (?!...)           | Negative lookahead: Matches if the group is **not** followed by the pattern.| `\d(?!\d)` matches a digit not followed by another digit. |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| (?<=...)          | Positive lookbehind: Matches if the group is preceded by the pattern.| `(?<=a)b` matches "b" only if preceded by "a". |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| (?<!...)          | Negative lookbehind: Matches if the group is **not** preceded by the pattern.| `(?<!a)b` matches "b" only if not preceded by "a". |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| \Z                | End of string anchor: Matches at the end of the string (allows for a trailing newline). | `abc\Z` matches "abc" at the very end. |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+| \b{n}             | Matches exactly n occurrences of the previous element.          | `\d{3}` matches exactly 3 digits.           |
++-------------------+------------------------------------------------------------------+----------------------------------------------+
+
+
+
+
+
+My Question: what are the different operators in regex like | is OR what else
+In regular expressions (regex), there are several operators and special characters that define how the matching process works. Here's a list of the most common ones and their meanings:
++----+-----------------------------------+------------------------------------------------------------------+
+| No | Operator                         | Description                                                      |
++----+-----------------------------------+------------------------------------------------------------------+
+|  1 | Concatenation (Implicit)          | Matches characters in sequence without any special operator.     |
+|    |                                   | Example: `abc` matches "abc".                                    |
++----+-----------------------------------+------------------------------------------------------------------+
+|  2 | Alternation (OR) `|`              | Matches either the left or the right pattern.                    |
+|    |                                   | Example: `cat|dog` matches "cat" or "dog".                       |
++----+-----------------------------------+------------------------------------------------------------------+
+|  3 | Wildcard `.`                      | Matches any character except a newline.                          |
+|    |                                   | Example: `a.c` matches "abc", "axc", etc.                        |
++----+-----------------------------------+------------------------------------------------------------------+
+|  4 | Anchors `^`, `$`                  | `^` matches the start of the string.                              |
+|    |                                   | `$` matches the end of the string.                               |
+|    |                                   | Example: `^hello` matches "hello" at the start.                  |
+|    |                                   | Example: `world$` matches "world" at the end.                    |
++----+-----------------------------------+------------------------------------------------------------------+
+|  5 | Character Classes `[]`            | Matches any one of the characters inside the brackets.           |
+|    |                                   | Example: `[abc]` matches "a", "b", or "c".                       |
++----+-----------------------------------+------------------------------------------------------------------+
+|  6 | Negating Character Class `[^]`    | Matches any character except those listed inside the brackets.   |
+|    |                                   | Example: `[^abc]` matches anything but "a", "b", or "c".         |
++----+-----------------------------------+------------------------------------------------------------------+
+|  7 | Quantifiers `*`, `+`, `?`, `{n,m}`| `*` matches 0 or more occurrences of the preceding element.      |
+|    |                                   | `+` matches 1 or more occurrences of the preceding element.      |
+|    |                                   | `?` matches 0 or 1 occurrence of the preceding element.          |
+|    |                                   | `{n,m}` matches between n and m occurrences of the preceding.    |
+|    |                                   | Example: `a*` matches "", "a", "aa", etc.                        |
+|    |                                   | Example: `a{2,4}` matches "aa", "aaa", "aaaa".                   |
++----+-----------------------------------+------------------------------------------------------------------+
+|  8 | Grouping and Capturing `()`       | Groups expressions and captures the match.                       |
+|    |                                   | Example: `(abc)` captures "abc".                                 |
++----+-----------------------------------+------------------------------------------------------------------+
+|  9 | Non-Capturing Group `(?:...)`     | Groups expressions but **does not capture** the match.           |
+|    |                                   | Example: `(?:abc)+` matches "abc", "abcabc", but doesn't capture.|
++----+-----------------------------------+------------------------------------------------------------------+
+| 10 | Escape Character `\`              | Escapes special characters and matches them literally.           |
+|    |                                   | Example: `\.` matches a literal dot (`.`).                       |
++----+-----------------------------------+------------------------------------------------------------------+
+| 11 | Word Boundaries `\b`, `\B`        | `\b` matches a word boundary (between a word character and non-word).|
+|    |                                   | `\B` matches a non-word boundary.                                |
+|    |                                   | Example: `\bcat\b` matches "cat" in "a cat", but not "scattered".|
++----+-----------------------------------+------------------------------------------------------------------+
+| 12 | Lookahead and Lookbehind `(?=...)`, `(?!...)`, `(?<=...)`, `(?<!...)`| Checks if a pattern is followed or preceded by another. |
+|    |                                   | `(?=...)` is Positive Lookahead.                                 |
+|    |                                   | `(?!...)` is Negative Lookahead.                                 |
+|    |                                   | `(?<=...)` is Positive Lookbehind.                               |
+|    |                                   | `(?<!...)` is Negative Lookbehind.                               |
+|    |                                   | Example: `\d(?=\D)` matches a digit followed by a non-digit.     |
+|    |                                   | Example: `\d(?!\d)` matches a digit **not** followed by another digit. |
++----+-----------------------------------+------------------------------------------------------------------+
+| 13 | Atomic Groups `(?>...)`           | Prevents backtracking once a match is found.                     |
+|    |                                   | Example: `(?>abc)+` matches "abc", "abcabc", but doesn't backtrack. |
++----+-----------------------------------+------------------------------------------------------------------+
+| 14 | End of String `\Z`                | Matches the position at the very end of the string.              |
+|    |                                   | Example: `abc\Z` matches "abc" at the very end of the string.    |
++----+-----------------------------------+------------------------------------------------------------------+
+Summary of the Points:
+Concatenation (Implicit): Direct sequence of characters.
+Alternation (|): OR condition, matches either the left or right pattern.
+Wildcard (.): Matches any character except newline.
+Anchors (^, $): Match positions at the start or end of the string.
+Character Classes ([]): Match any one of the listed characters.
+Negating Character Class ([^]): Match any character except the listed ones.
+Quantifiers (*, +, ?, {n,m}): Control the number of occurrences for matching.
+Grouping and Capturing (()): Group and capture patterns.
+Non-Capturing Group ((?:...)): Group without capturing the match.
+Escape Character (\): Escape special characters.
+Word Boundaries (\b, \B): Match the boundaries of words or non-words.
+Lookahead/Lookbehind ((?=...), (?!...), (?<=...), (?<!...)): Check for a pattern before or after the current position.
+Atomic Groups ((?>...)): Prevent backtracking within the group.
