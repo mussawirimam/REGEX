@@ -1,0 +1,127 @@
+
+GrokPatterns:
+https://github.com/cjslack/grok-debugger/blob/master/public/patterns/grok-patterns
+Regex:
+https://github.com/kkos/oniguruma/blob/master/doc/RE
+Regex video:
+https://www.youtube.com/watch?v=rhzKDrUiJVk&ab_channel=WebDevSimplified Learn Regular Expressions In 20 Minutes
+https://www.youtube.com/watch?v=9RksQ5YT7FM&ab_channel=CrackConcepts REGEX (REGULAR EXPRESSIONS) WITH EXAMPLES IN DETAIL | Regex Tutorial
+
+
+tools:
+https://grokdebugger.com/ for grok patterns
+https://regexr.com/ regex 
+https://regex101.com/
+
+
+
+%{WORD:first_word} %{GREEDYDATA:remaining_text}
+
+Your sample logs go here
+Start typing a pattern above for suggestions, e.g. %{WORD:word}
+Named capture groups work too, e.g. (?<name>pattern)
+
+
+
+-----------------------------------------------
+GROK
+-----------------------------------------------
+
+just a basic example for regex
+#####
+
+^.*
+.*$
+
+^(?=.*Your\s+sample|\nsample\s+date:\s+Your\s+sample)(?P<log>.*)$
+
+
+
+in grok
+%{BASE10NUM:number}
+
+learn between the flags of global and multiline etc
+-----------------------------------------------
+REGEX
+-----------------------------------------------
+RegExr was created by gskinner.com.
+
+Edit the Expression & Text to see matches. Roll over matches or the expression for details. PCRE & JavaScript flavors of RegEx are supported. Validate your expression with Tests mode.
+
+The side bar includes a Cheatsheet, full Reference, and Help. You can also Save & Share with the Community and view patterns you create or favorite in My Patterns.
+
+Explore results with the Tools below. Replace & List output custom results. Details lists capture groups. Explain describes your expression in plain English. 123
+
+
+^.*
+RegExr was created by gskinner.com.
+
+skinner{1}
+skinner
+
+
+e
+e+a			one or more
+e+a?			one or more and a is optional
+ea?
+ea*			match zero or more 
+.			matches anything, except for newline
+\.			escape and treats period as normal period
+.\.			everything andthe periods
+\w			word character
+\s			spaces
+\w{4,5}			words more than 4 characters long {} is a quantifier
+[fc]at			character grouping
+[a-z]at			ranges of a-z with at
+(t|T)he			grouping match any lowercase t or Uppercase T
+(t|T){2,3}he
+(t|T|r){2,3}		will match two and three of in row
+(t|T|r){2,3}\.		will match the . at the end with grouping as well
+e{2,3}
+re{2,3}
+(re)\.{1,3}|(re){1,3}	concatenating the two expressions
+^			carrot symbol matches the beginning of our statement. Selecting one chunk of the line
+/^I/gm			/gm is a global and multiline mode of regex
+^T
+^The
+^[T|t]he
+^[Tt]he
+$			end of the line
+\$.
+
+look ahead and look behind
+(?<=)			 < look behind = is positive
+(?<=[tT]he).		it doesn't actually select 
+(?<=![tT]he).
+(?=![tT]he).		        look ahead we just remove the < symbol
+.(?=at)
+.(?!=at)			not followed by the at
+
+
+
+examples:
+\d{10}
+1234567890
+
+/\d{3}-?\d{3}-?\d{4}/gm
+1234567890
+123-456-7890
+
+/\d{3}[ -]?\d{3}[ -]?\d{4}/gm
+1234567890
+123-456-7890
+123 456 7890
+
+/(\d{3})[ -]?(\d{3})[ -]?(\d{4})/gm
+1234567890
+123-456-7890
+123 456 7890
+
+replace:
+$1$2$3
+
+replace:
+/(\d{3})[ -]?(\d{3})[ -]?(\d{4})/gm
+
+
+
