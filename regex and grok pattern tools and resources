@@ -1,14 +1,12 @@
-QUESTIONS:
-how to join the regex patterns? 
-
 
 GrokPatterns:
-https://github.com/cjslack/grok-debugger/blob/master/public/patterns/grok-patterns
+Grok pattern liberary on grokdebugger.com: https://github.com/cjslack/grok-debugger/blob/master/public/patterns/grok-patterns
+
 Regex:
-https://github.com/kkos/oniguruma/blob/master/doc/RE
+regex library for the opensearch grok patterns: https://github.com/kkos/oniguruma/blob/master/doc/RE
 Regex video:
-https://www.youtube.com/watch?v=rhzKDrUiJVk&ab_channel=WebDevSimplified Learn Regular Expressions In 20 Minutes
-https://www.youtube.com/watch?v=9RksQ5YT7FM&ab_channel=CrackConcepts REGEX (REGULAR EXPRESSIONS) WITH EXAMPLES IN DETAIL | Regex Tutorial
+Learn Regular Expressions In 20 Minutes by webdev simplified: https://www.youtube.com/watch?v=rhzKDrUiJVk&ab_channel=WebDevSimplified
+REGEX (REGULAR EXPRESSIONS) WITH EXAMPLES IN DETAIL | Regex Tutorial by crackconcepts: https://www.youtube.com/watch?v=9RksQ5YT7FM&ab_channel=CrackConcepts 
 
 
 tools:
@@ -62,6 +60,9 @@ RegExr was created by gskinner.com.
 skinner{1}
 skinner
 
+sample text:
+The fat cat ran down the street. 
+It was searching for a mouse to eat. 
 
 e
 e+a			one or more
@@ -123,8 +124,65 @@ examples:
 replace:
 $1$2$3
 
-replace:
-/(\d{3})[ -]?(\d{3})[ -]?(\d{4})/gm
+naming group:
+(?<areacode>\d{3})[ -]?(\d{3})[ -]?(\d{4})/gm
+## it should show the name of $1 as areacode
+$1$2$3
 
 
+\(?(?<areacode>\d{3})\)?[ -]?(\d{3})[ -]?(\d{4})
+1234567890
+123-456-7890
+123 456 7890
+(123) 456-7890
 
+/\?(\d{3})\)[ -]?(\d{3})[ -]?(\d{4})/gm
+1234567890
+123-456-7890
+123 456 7890
+(123) 456-7890
++1 123 456 7890
+
+---------------------------------------------------------------------
+lesson from: REGEX (REGULAR EXPRESSIONS) WITH EXAMPLES IN DETAIL | Regex Tutorial
+
+
+used for pattern matching or string.
+[abc]		a,b or c
+[^abc]		any character except a,b,c 
+[a-z]		a to z
+[A-Z]		A to Z
+[a-zA-z]	a to z, A to Z
+[0-9]		0 to 9
+
+
+QUANTIFIERS:
+[]?		occur 0 or 1 time
+[]+		occurs 1 or more times
+[]*		occurs 0 or more times
+[]{n}		occurs n times
+[]{n,}		occurs n or more times
+[]{y,z}		occurs atleast y times but less than z time
+
+REGEX METACHARACTERS:
+\d		[0-9]
+\D		[^0-9]
+\w		[a-zA-Z_0-9]
+\W		[^\w]
+
+=============================================================================
+\ tells computer to treat following character as search character for '+' '.' # it is called escape character
+
+Examples:-
+1. mobile number start with 8-9 and total digit = 9
+2. password example:First character uppercase, contains lower case alphabets, only one digit allowed in between
+3. email ID Sadia@gmail.com
+
+answer1.
+[8-9][0-9]{9}
+
+answer2.
+[A-Z][a-z]*[0-9][a-z]*
+
+answer3.
+[a-zA-Z0-9_\-\.\]+[@][a-z]+[\.][a-z]{2,3}
