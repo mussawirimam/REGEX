@@ -3,6 +3,7 @@ GrokPatterns:
 Grok pattern liberary on grokdebugger.com: https://github.com/cjslack/grok-debugger/blob/master/public/patterns/grok-patterns
 
 Regex:
+quick reference for regex: https://quickref.me/regex
 regex library for the opensearch grok patterns: https://github.com/kkos/oniguruma/blob/master/doc/RE
 Regex video:
 Learn Regular Expressions In 20 Minutes by webdev simplified: https://www.youtube.com/watch?v=rhzKDrUiJVk&ab_channel=WebDevSimplified
