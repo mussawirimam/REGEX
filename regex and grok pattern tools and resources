@@ -185,4 +185,6 @@ answer2.
 [A-Z][a-z]*[0-9][a-z]*
 
 answer3.
-[a-zA-Z0-9_\-\.\]+[@][a-z]+[\.][a-z]{2,3}
+divide the group of words characters
+[Sadia]one or more time + [@][gmail]\[.][com]
+[a-zA-Z0-9_\-\.]+[@][a-z]+[\.][a-z]{2,3}
