@@ -1,0 +1,82 @@
+on rockylinux 
+dnf install ripgrep
+
+rg uses rust based regex but doesnt support full pcre
+https://regex101.com/r/nI8xB8/1
+-U or --multiline flag
+580  rg '\w+/' /var/log/kibana/kibana.log
+  581  rg '\w+/g' /var/log/kibana/kibana.log
+  582  rg '\w+' /var/log/kibana/kibana.log
+  583  rg '\w+\n' /var/log/kibana/kibana.log
+  584  rg --U '\w+\n' /var/log/kibana/kibana.log
+  585  rg --U 'executable' /var/log/kibana/kiban
+
+
+look into pcregrep which supports full pcre based regex
+sudo apt install pcregrep        # Debian/Ubuntu
+sudo dnf install pcre-tools      # Fedora/RHEL
+brew install pcre                # macOS
+
+pcregrep '(?<=foo)bar' file.txt         # Positive lookbehind
+pcregrep '(\w+)\s+\1' file.txt          # Backreference to repeated word
+
+
+What type of regex does Elasticsearch use in its ingest pipelines (e.g., with grok, script, etc.)?
+✅ Short Answer:
+Elasticsearch primarily uses Java-based regular expressions, specifically the flavor supported by the Java Pattern API — which is similar to PCRE, but not identical.
+🔍 Where regex is used in Elasticsearch:
+1. Grok processor (Ingest pipelines)
+Grok is built on regex.
+Uses named regex patterns like %{IP}, %{WORD}, etc.
+Internally, it's compiled into Java regex.
+You can define custom patterns or use raw regex inside grok patterns.
+{
+  "grok": {
+    "field": "message",
+    "patterns": ["%{COMMONAPACHELOG}"]
+  }
+}
+
+
+2. Script processor (painless)
+You can use regex with the Pattern class inside a painless script.
+{
+  "script": {
+    "source": """
+      if (ctx.message != null && ctx.message =~ /error.*/) {
+        ctx.level = 'error';
+      }
+    """
+  }
+}
+✅ Uses Java regex engine under the hood.
+3. Regex-based filters in queries or mappings
+e.g., regexp query, pattern in mappings, etc.
+{
+  "regexp": {
+    "username": "admin[0-9]+"
+  }
+}
+Again: This is Java regex, not full PCRE. It supports things like:
+Character classes ([a-z])
+Quantifiers (*, +, {n,m})
+Anchors (^, $)
+Alternation (|)
+Grouping ((pattern))
+❌ No support for:
+Lookaheads ((?=...))
+Lookbehinds ((?<=...))
+Backreferences (\1, \k<name>)
+🚫 What You Don’t Get:
+
+Feature	Supported in Elasticsearch?
+Lookahead	❌ No
+Lookbehind	❌ No
+Backreferences	❌ No
+Named capture groups	❌ No (except via grok's named fields)
+🧠 TL;DR:
+
+Area	Regex Type
+Grok	Java regex (via grok patterns)
+Script processor	Java regex (via Painless)
+Regexp query	Java regex
