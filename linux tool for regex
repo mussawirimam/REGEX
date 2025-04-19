@@ -80,3 +80,6 @@ Area	Regex Type
 Grok	Java regex (via grok patterns)
 Script processor	Java regex (via Painless)
 Regexp query	Java regex
+
+So: Elasticsearch uses Java-style regex, which is powerful but not quite full PCRE.
+Let me know if you want help crafting a regex for Elasticsearch — grok patterns especially can be a bit tricky!
