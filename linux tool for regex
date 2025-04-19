@@ -83,3 +83,60 @@ Regexp query	Java regex
 
 So: Elasticsearch uses Java-style regex, which is powerful but not quite full PCRE.
 Let me know if you want help crafting a regex for Elasticsearch — grok patterns especially can be a bit tricky!
+
+
+
+
+what about Logstash what regex that uses?
+ChatGPT said:
+Ah, now we’re getting into the Logstash side of the ELK stack — nice!
+🧠 So, what kind of regex does Logstash use?
+✅ Short Answer:
+**Logstash uses Java-style regular expressions, just like Elasticsearch — because it runs on the JVM and uses the same underlying Java regex engine.
+But it gets even more powerful when you use Grok filters, which are basically named regex patterns built on top of Java regex.
+🧩 Breakdown:
+1. grok filter plugin (most common regex use in Logstash)
+Grok is built entirely on Java regex.
+Provides a readable DSL of named patterns like %{IP}, %{DATA}, %{WORD}, etc.
+You can also define custom regex patterns.
+filter {
+  grok {
+    match => { "message" => "%{IP:client} %{WORD:method} %{URIPATHPARAM:request}" }
+  }
+}
+Under the hood, the %{IP} expands into a Java regex like:
+(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.|$)){4}
+✅ So you're really using Java regex — just made friendlier via Grok.
+2. regexp in conditionals
+You can use raw regex in conditionals too:
+if [message] =~ /ERROR.*/ {
+  mutate { add_field => { "level" => "error" } }
+}
+✅ Again: This is Java regex, so:
+Character classes, groups, quantifiers — ✅
+Backreferences (\1) — ✅
+Lookaheads ((?=...)) — ✅
+Lookbehinds ((?<=...)) — ✅
+🚨 BUT: Whether lookbehind is supported depends on the exact Java version running Logstash. Older versions didn’t always handle complex lookbehinds well.
+3. mutate, gsub, and other filters
+These support regex in substitution too:
+mutate {
+  gsub => [ "message", "\s+", " " ]
+}
+Again — Java regex flavor.
+✅ Summary: What Regex Does Logstash Use?
+
+Feature	Supported?
+Character classes	✅ Yes
+Groups & alternation	✅ Yes
+Quantifiers (+, *)	✅ Yes
+Lookaheads	✅ Yes
+Lookbehinds	✅ Yes (Java >= 9+, depending on complexity)
+Backreferences	✅ Yes
+Named groups	❌ Not in raw regex, but grok offers named fields
+🔧 TL;DR:
+Logstash uses Java regular expressions across its filters, especially:
+grok (built on regex)
+regexp in conditionals
+gsub in mutate filters
+💡 If you're using grok, you're working with friendly regex abstractions that expand into gnarly Java regex behind the scenes.
