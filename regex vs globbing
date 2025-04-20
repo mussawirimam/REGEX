@@ -1,0 +1,12 @@
+regex vs globbing
+
+Globbing behave differently then the regex, example:
+in globbing * means any string character 
+
+and in 
+
+Regex * means any number of characters
+
+So:
+.* in regex = "any number of any character"
+* in glob = "any string of characters"
